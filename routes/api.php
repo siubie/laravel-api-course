@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\QuoteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,5 @@ Route::get('/hello', function () {
     $data = ["message" => "hello world"];
     return response()->json($data, 200);
 });
+
+Route::apiResource("/quote", QuoteController::class);
