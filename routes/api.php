@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\QuoteController;
+use App\Http\Controllers\Api\ApiAuthController;
+use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\QuoteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,10 +21,27 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::get('/hello', function () {
-    // better practice
-    $data = ["message" => "hello world"];
-    return response()->json($data, 200);
+    $data = ["message" => "Hello World"];
+    return response()->json($data);
 });
 
-Route::apiResource("/quote", QuoteController::class);
+//route middleware for authenticated user
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('/quote', QuoteController::class);
+    Route::post('/logout', [ApiAuthController::class, 'logout']);
+});
+
+Route::post('/register', [ApiAuthController::class, 'register']);
+Route::post('/login', [ApiAuthController::class, 'login']);
+
+Route::post('/file-upload', [FileUploadController::class, 'uploadFile']);
+
+
+// Route::group('/quote', function () {
+//     Route::get('listQuote/', [QuoteController::class, 'index']);
+//     Route::get('getQuote/{id}', [QuoteController::class, 'show']);
+//     Route::put('updateQuote/{id}', [QuoteController::class, 'update']);
+//     Route::delete('deleteQuote/{id}', [QuoteController::class, 'destroy']);
+// });
