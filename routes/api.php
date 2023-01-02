@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\ApiAuthController;
 use App\Http\Controllers\FileUploadController;
-use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\Api\QuoteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
