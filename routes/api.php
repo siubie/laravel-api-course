@@ -37,6 +37,7 @@ Route::post('/register', [ApiAuthController::class, 'register']);
 Route::post('/login', [ApiAuthController::class, 'login']);
 
 Route::post('/file-upload', [FileUploadController::class, 'uploadFile']);
+Route::put('/file-upload', [FileUploadController::class, 'uploadFile']);
 
 
 // Route::group('/quote', function () {
